@@ -12,6 +12,7 @@ class MoviesController < ApplicationController
 
   def index
     all_ratings = Movie.group(:rating)
+    puts(all_ratings)
     @all_ratings = Array.new
     all_ratings.each do |rat|
     	@all_ratings.append(rat.rating)
