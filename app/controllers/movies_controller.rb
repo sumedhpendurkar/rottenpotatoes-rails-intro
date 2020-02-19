@@ -11,8 +11,19 @@ class MoviesController < ApplicationController
   end
 
   def index
+    all_ratings = Movie.group(:rating)
+    @all_ratings = Array.new
+    all_ratings.each do |rat|
+    	@all_ratings.append(rat.rating)
+    end
     @sort_var = params[:sort_field]
-    @movies = Movie.order(@sort_var) 
+    if (params).key?(:ratings)
+	@set_ratings = params[:ratings]
+    	@movies = Movie.order(@sort_var).where(rating: params[:ratings].keys)
+    else
+	@set_ratings = Hash.new(@all_ratings)
+	@movies = Movie.order(@sort_var)
+    end
   end
 
   def new
