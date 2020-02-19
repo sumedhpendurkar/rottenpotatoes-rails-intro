@@ -33,13 +33,13 @@ class MoviesController < ApplicationController
     end
     if redirect
       flash.keep
-      redirect_to(:action=>'index',:sort_field=>@sort_by,:ratings=>@set_ratings)
+      redirect_to(:action=>'index',:sort_field=>@sort_var,:ratings=>@set_ratings)
     end
     if @set_ratings and @sort_var
-      @movies = Movie.where(:rating=>@set_ratings.keys).order(@sort_by)
+      @movies = Movie.where(:rating=>@set_ratings.keys).order(@sort_var)
     elsif @set_ratings
       @movies = Movie.where(:rating=>params[:ratings].keys)
-    elsif @sort_by
+    elsif @sort_var
       @movies = Movie.all.order(params[:sort_field])
       @set_ratings = Hash.new(@all_ratings)
     else
