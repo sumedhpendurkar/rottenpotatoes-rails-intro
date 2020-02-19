@@ -19,11 +19,12 @@ class MoviesController < ApplicationController
     elsif session[:sort_field]
         @sort_var = session[:sort_field]
         #need redirect
-        rediret = true
+        redirect = true
     end
     @set_ratings = nil
     if params[:commit] =='Refresh' and params[:ratings].nil?
       @set_ratings = session[:ratings]
+      redirect = true
       session[:ratings] = nil
     elsif params.key?(:ratings)
       @set_ratings = params[:ratings]
