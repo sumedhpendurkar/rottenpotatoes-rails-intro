@@ -11,12 +11,7 @@ class MoviesController < ApplicationController
   end
 
   def index
-    all_ratings = Movie.group(:rating)
-    puts(all_ratings)
-    @all_ratings = Array.new
-    all_ratings.each do |rat|
-    	@all_ratings.append(rat.rating)
-    end
+    @all_ratings = Movie.get_all_ratings 
     @sort_var = params[:sort_field]
     if (params).key?(:ratings)
 	@set_ratings = params[:ratings]
