@@ -23,6 +23,7 @@ class MoviesController < ApplicationController
     end
     @set_ratings = nil
     if params[:commit] =='Refresh' and params[:ratings].nil?
+      @set_ratings = session[:ratings]
       session[:ratings] = nil
     elsif params.key?(:ratings)
       @set_ratings = params[:ratings]
